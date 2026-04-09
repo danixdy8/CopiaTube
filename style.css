@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #0a0a0a;
+}
+
+:root {
+  --cian: #00d4e8;
+  --cian-dim: rgba(0, 212, 232, 0.12);
+  --cian-glow: rgba(0, 212, 232, 0.35);
+  --borde: #1c1c1c;
+  --card-hover: #141414;
+}
+
+body {
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  background-color: #0a0a0a;
+  color: #e0e0e0;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Header ──────────────────────────────────────── */
+.sitio-header {
+  background-color: #0a0a0a;
+  border-bottom: 1px solid var(--borde);
+  padding: 13px 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.4px;
+  transition: opacity 0.2s;
+}
+
+.logo:hover { opacity: 0.75; }
+
+.logo-icono {
+  color: var(--cian) !important; /* El !important le gana a cualquier otro color */
+  font-size: 1.35rem;
+  filter: drop-shadow(0 0 8px var(--cian-glow));
+  transition: filter 0.3s;
+  display: inline-block; /* A veces ayuda con los efectos de sombra */
+}
+
+.logo:hover .logo-icono {
+  filter: drop-shadow(0 0 14px var(--cian));
+}
+
+/* ── Nav principal ───────────────────────────────── */
+.nav-principal {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 24px;
+  flex-wrap: wrap;
+}
+
+.nav-principal a {
+  text-decoration: none;
+  color: #666;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.nav-principal a:hover {
+  color: var(--cian);
+  border-color: var(--cian-dim);
+  background: var(--cian-dim);
+}
+
+/* ── Layout ──────────────────────────────────────── */
+.contenedor-principal {
+  display: flex;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px;
+  gap: 28px;
+  flex: 1;
+}
+
+/* ── Player ──────────────────────────────────────── */
+.player-area {
+  flex: 3;
+  min-width: 0;
+}
+
+.video-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--borde), 0 8px 40px rgba(0,0,0,0.7);
+  background: #000;
+  position: relative;
+}
+
+.video-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cian), transparent);
+  z-index: 2;
+}
+
+.player-area video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  background-color: #000;
+}
+
+/* Título y canal directo bajo el player (sin .video-info) */
+.player-area h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.3px;
+  margin-top: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.canal {
+  margin-top: 7px;
+  color: #5a5a5a;
+  font-size: 0.84rem;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--borde);
+}
+
+/* ── Sidebar ──────────────────────────────────────── */
+.sidebar {
+  flex: 1;
+  min-width: 320px;
+}
+
+.sidebar-titulo {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--cian);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--cian-dim);
+}
+
+.lista-sugerencias {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Tarjetas (sin .miniatura ni .info-tarjeta) ──── */
+.tarjeta a {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  grid-template-rows: auto auto;
+  gap: 0 12px;
+  text-decoration: none;
+  color: #e0e0e0;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  align-items: center;
+}
+
+.tarjeta a:hover {
+  background: var(--card-hover);
+  border-color: var(--cian-dim);
+  transform: translateX(4px);
+}
+
+/* El video ocupa las 2 filas del grid */
+.tarjeta video {
+  grid-row: 1 / 3;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 7px;
+  object-fit: cover;
+  background: #111;
+  display: block;
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.tarjeta a:hover video {
+  opacity: 0.85;
+  transform: scale(1.03);
+}
+
+.tarjeta strong {
+  font-size: 0.87rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #eaeaea;
+  transition: color 0.2s;
+  align-self: end;
+}
+
+.tarjeta a:hover strong { color: #fff; }
+
+.tarjeta span {
+  color: #4a4a4a;
+  font-size: 0.78rem;
+  align-self: start;
+}
+
+/* ── Footer ──────────────────────────────────────── */
+footer {
+  background: linear-gradient(135deg, #0d1a1c 0%, #0a1215 100%);
+  border-top: 2px solid var(--cian);
+  text-align: center;
+  padding: 20px;
+  color: #4a9aa8;
+  font-size: 0.75rem;
+  letter-spacing: 0.3px;
+  position: relative;
+  box-shadow: 0 -4px 24px rgba(0, 212, 232, 0.08);
+}
+
+footer::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cian), transparent);
+}
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 1000px) {
+  .contenedor-principal {
+    flex-direction: column;
+    padding: 14px;
+  }
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+  }
+}
